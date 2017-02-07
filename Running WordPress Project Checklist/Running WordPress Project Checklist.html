@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Running WordPress Project Checklist</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+        <style>
+        .logo {
+            width: 8%;
+            margin: 0 auto;
+            display: block;
+            opacity: 0.2;
+        }
+        .inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        .heading-main {
+            margin: 10px 0;
+            font-size: 2.6em;
+            font-weight: 700;
+            text-align: center;
+        }
+        .heading-sub {
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            margin: 0;
+            text-transform: uppercase;
+            color: #dd2741;
+            text-align: center;
+        }
+        .heading-sub a {
+            color: #dd2741;
+            text-decoration: none;
+        }
+        .heading-sub a:hover {
+            background: #dd2741;
+            color: #fff;
+        }
+        main {
+            padding: 40px 0;
+            text-align: center;
+            color: #282828;
+            font-family: 'Roboto', sans-serif;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        footer ul {
+            margin: 0;
+            padding: 0;
+            font-size: 2em;
+            list-style: none;
+        }
+        footer li {
+            margin: 20px 0;
+        }
+        footer ul a {
+            color: #dd2741;
+            text-decoration: none;
+        }
+        footer ul a:hover {
+            text-decoration: underline;
+        }
+        article {
+            font-size: 1.17em;
+            line-height: 1.4;
+            text-align: left;
+        }
+        article h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        article a {
+            color: #dd2741;
+        }
+        article a:hover {
+            color: #282828;
+        }
+        article > p:first-child {
+            font-weight: bold;
+        }
+        .-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .-sans {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .-gray {
+            color: #282828;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <header>
+                <div class="inner">
+                    <h1 class="heading-main -serif">Running WordPress Project Checklist</h1>
+                    <p class="heading-sub -sans">Agency Recue Kit from <a target="_blank" href="http://pagepro.co">Pagepro</a></p>
+                </div>
+            </header>
+            <main>
+                <div class="inner">
+                <article>
+                    <p>We&#8217;ve prepared a basic checklist that can help you with managing or developing WordPress project.</p>
+<h2>PM: Kickoff</h2>
+<ul>
+<li>Is the estimation document available?</li>
+<li>Is the specification document available?</li>
+<li>Create project on Harvest (time tracking software)</li>
+<li>Assign valid people to the Harvest project</li>
+<li>Create project on Redmine (project management software)</li>
+<li>Assign valid people to the Redmine project</li>
+<li>Create GIT repository for WordPress project</li>
+<li>Assign valid people to GIT, make sure if access rights are correct.</li>
+<li>Make sure if WP developer(s) have access to front-end files repository</li>
+<li>Add link to WP repository and Front-end repository in Redmine Wiki</li>
+<li>Add links to important materials (agreement, specs, wireframes) in WIKI</li>
+</ul>
+<h2>DEV: Initial works</h2>
+<ul>
+<li>Clone repository on local computer</li>
+<li>Install latest WordPress on your local environment</li>
+<li>Setup the same vhost name across the team &#8211; for an example mango-wp.dev</li>
+<li>Add basic configuration: website name, language</li>
+<li>Create develop branch in repository, push latest WordPress to develop branch</li>
+</ul>
+<h2>DEV: test server</h2>
+<ul>
+<li>Check test server access details: FTP or/and ssh. Check write privileges.</li>
+<li>Add valid server access details to Redmine Wiki</li>
+<li>Check or create database access details.</li>
+<li>Add valid database access details to Redmine Wiki (database + phpMyAdmin if possible)</li>
+<li>Configure subdomain for test instance (test.production.com or beta.production.com)</li>
+<li>Clone repository on test instance server</li>
+<li>Import DB dump on test instance</li>
+<li>Change hardcoded domain names in DB</li>
+<li>Add password protection for test instance</li>
+<li>Update Redmine wiki: test instance URL, password, admin login, admin password</li>
+</ul>
+<h2>DEV: Development / implementation</h2>
+<ul>
+<li>Create custom WP theme</li>
+<li>Remove unused WP themes</li>
+<li>Do tasks from Project Backlog</li>
+</ul>
+<h2>DEV: Going live</h2>
+<ul>
+<li>Install Google Analytics tracking code</li>
+<li>Prepare the testing scenarios before deployment</li>
+<li>Combine CSS &amp; JS files</li>
+<li>Install caching plugin</li>
+<li>Install security plugin</li>
+<li>Change default wp-admin URL</li>
+<li>Check if everything works, ask PM or Q&amp;A guy for verification</li>
+<li>Setup backups</li>
+</ul>
+                </article>
+            </main>
+            <footer>
+                <div class="inner">
+                    <p class="heading-sub -sans -gray">Read also:</p>
+                    <ul>
+                        <li>
+                            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1l9lP3-3o7-SiaPGL1ecFjNXrc0hKFkASRWMYWBVahC0/edit?usp=sharing">Google Sheets Template</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://blog.pagepro.co/2017/02/04/wordpress-project-checklist/">Blog Post</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

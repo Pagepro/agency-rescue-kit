@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>WordPress coding standards and best practises</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/php.min.js"></script>
+        <style>
+        .logo {
+            width: 8%;
+            margin: 0 auto;
+            display: block;
+            opacity: 0.2;
+        }
+        .inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        .heading-main {
+            margin: 10px 0;
+            font-size: 2.6em;
+            font-weight: 700;
+            text-align: center;
+        }
+        .heading-sub {
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            margin: 0;
+            text-transform: uppercase;
+            color: #dd2741;
+            text-align: center;
+        }
+        .heading-sub a {
+            color: #dd2741;
+            text-decoration: none;
+        }
+        .heading-sub a:hover {
+            background: #dd2741;
+            color: #fff;
+        }
+        main {
+            padding: 40px 0;
+            text-align: center;
+            color: #282828;
+            font-family: 'Roboto', sans-serif;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        footer ul {
+            margin: 0;
+            padding: 0;
+            font-size: 2em;
+            list-style: none;
+        }
+        footer li {
+            margin: 20px 0;
+        }
+        footer ul a {
+            color: #dd2741;
+            text-decoration: none;
+        }
+        footer ul a:hover {
+            text-decoration: underline;
+        }
+        article {
+            font-size: 1.17em;
+            line-height: 1.4;
+            text-align: left;
+        }
+        article h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        article a {
+            color: #dd2741;
+        }
+        article a:hover {
+            color: #282828;
+        }
+        article > p:first-child {
+            font-weight: bold;
+        }
+        .-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .-sans {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .-gray {
+            color: #282828;
+        }
+        /*
+    SYNTAX STYLES
+*/
+pre {
+  line-height: 19px;
+  margin: 35px 0;
+  padding: 6px 10px;
+  padding: 25px 30px;
+  word-wrap: break-word;
+  color: #f8f8f2;
+  border-radius: 3px;
+  background: #1e2328;
+}
+
+code {
+  font-size: 16px;
+  margin: 0 2px;
+  padding: 0 5px;
+  color: #161617;
+  border: 1px solid #eaeaea;
+  background: transparent;
+}
+
+pre code {
+  line-height: 29px;
+  margin: 0;
+  padding: 0;
+  color: #f8f8f2;
+  color: #f8f8f2;
+  border: 0;
+  border-radius: 0;
+  background: #1e2328;
+}
+
+pre,
+code {
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  border-radius: 3px;
+}
+
+pre,
+pre code {
+  font-size: 14px;
+}
+
+pre .comment {
+  color: #717e8b;
+}
+
+pre .constant {
+  color: #ff6b6b;
+}
+
+pre .constant.language {
+  color: #268bd2;
+}
+
+pre .constant.regexp {
+  color: #2aa198;
+}
+
+pre .storage {
+  color: #4ca9eb;
+}
+
+pre .string,
+pre .comment.docstring {
+  color: #c7f464;
+}
+
+pre .support.tag.script,
+pre .support.tag.style {
+  color: #2aa198;
+}
+
+pre .string.regexp {
+  color: #2aa198;
+}
+
+pre .string.regexp.open,
+pre .string.regexp.close {
+  color: #2aa198;
+}
+
+pre .keyword,
+pre .selector {
+  color: #4ecdc4;
+}
+
+pre .inherited-class {
+  font-style: italic;
+}
+
+pre .entity {
+  color: #ff5454;
+}
+
+pre .support,
+.function.call {
+  color: #8ad6f2;
+}
+
+pre .support.method {
+  color: #839496;
+}
+
+pre .support.property {
+  color: #839496;
+}
+
+pre .variable.global,
+pre .variable.class,
+pre .variable.instance {
+  color: #839496;
+}
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <header>
+                <div class="inner">
+                    <h1 class="heading-main -serif">WordPress coding standards and best practises</h1>
+                    <p class="heading-sub -sans">Agency Recue Kit from <a target="_blank" href="http://pagepro.co">Pagepro</a></p>
+                </div>
+            </header>
+            <main>
+                <div class="inner">
+                    <article>
+                        <h2>General rules</h2>
+<ul>
+<li>Do not build your theme on top of a default WP Theme (Twenty {whatever}). Better pick <a href="http://underscores.me/">Underscores</a> or <a href="https://roots.io/">Roots</a>. Building a custom one isn’t a bad idea either.</li>
+<li>When you’re forced to use a theme, do not modify it either &#8211; create a <a href="https://codex.wordpress.org/Child_Themes">child theme</a>.</li>
+<li>Be consistent. Apply common formatting rules across all the files in the theme. It’s recommended to use auto-formatting (a feature that is built-in in all modern IDEs). <a href="http://editorconfig.org/">EditorConfig</a> is widely supported &#8211; let’s use it. It helps to keep consistency when working in a team.</li>
+<li>Do not reinvent the wheel. Follow the <a href="http://www.php-fig.org/psr/">PSR</a> rules &#8211; it’s a widely adopted standard.</li>
+<li>Name variables in a consistent way: either <code>$camelCase</code> or <code>$underscore_case</code> but never both.</li>
+<li><a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#single-and-double-quotes">Use single and double quotes when appropriate</a></li>
+<li>Use meaningful functions’ names. A good function name should indicate what the function is supposed to do and what type of data it takes and returns.</li>
+<li>Use meaningful variables’ names. A good variable name should indicate it’s type.</li>
+<li><a href="https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/">Document the code</a>. If a function name is self-explanatory, then the detailed explanation is not needed but its arguments have to be documented anyway.</li>
+<li>In order to separate the PHP code from the HTML code, use the <a href="http://php.net/manual/pl/control-structures.alternative-syntax.php">alternative control structure syntax</a>.
+<pre><code class="php">// Wrong:
+  &lt;?php while (have_posts()) { the_post(); ?&gt;
+      &lt;article class="post"&gt;
+          &lt;?php // Code ?&gt;
+      &lt;/article&gt;
+  &lt;?php } ?&gt;
+  
+  // Right:
+  &lt;?php while (have_posts()) : the_post() ?&gt;
+      &lt;article class="post"&gt;
+          &lt;?php // Code ?&gt;
+      &lt;/article&gt;
+  &lt;?php endwhile; ?&gt;
+</code></pre>
+</li>
+<li>Keep templates as clean and logic-less as possible. Move complex logic to separate utility functions.
+<pre><code class="php">  // Wrong
+  &lt;?php
+  $userCompanyId = intval(get_user_meta(get_current_user_id(), 'company-id', true), 10);
+  $companyId = intval(get_post_meta(get_the_ID(), 'company_id', true), 10);
+  ?&gt;
+  
+  &lt;?php if ($userCompanyId !== 0 &amp;&amp; $userId === $companyId) : ?&gt;
+      &lt;div class="company-data"&gt;
+          &lt;?php // Code ?&gt;
+      &lt;/div&gt;
+  &lt;?php endif; ?&gt;
+
+  // Right
+  // utils.php
+  function my_theme_current_user_can_access()
+  {
+      $userCompanyId = intval(get_user_meta(get_current_user_id(), 'company-id', true), 10);
+      $companyId = intval(get_post_meta(get_the_ID(), 'company_id', true), 10);
+  
+      if ($userCompanyId !== 0 &amp;&amp; $userCompanyId === $companyId) {
+          return true;
+      }
+  
+      return false;
+  }
+  
+  // template file
+  &lt;?php if (my_theme_current_user_can_access()) : ?&gt;
+      &lt;div class="company-data"&gt;
+          &lt;?php // Code ?&gt;
+      &lt;/div&gt;
+  &lt;?php endif; ?&gt;
+
+</code></pre>
+</li>
+<li>Do not echo the HTML tags.
+<pre><code class="php">  // Wrong:
+  &lt;?php echo '&lt;p class="' . $className . '"&gt;' . $content . '&lt;/p&gt;'; ?&gt;
+
+  // Right:
+  &lt;p class="&lt;?php echo $className ?&gt;"&gt;
+      &lt;?php echo $content; ?&gt;
+  &lt;/p&gt;</code></pre>
+</li>
+<li>Do not use global variables &#8211; use <a href="http://php.net/manual/pl/language.namespaces.php">namespaces</a>.</li>
+<li>In order to avoid conflicts, do not use generic names for the utility functions. Remember to prefix custom functions with a unique prefix. <code>get_users()</code> is a wrong function name while <code>my_theme_get_users()</code> is OK.<br />
+<em>Note:</em> Applying this rule is no longer required if a namespace is used, so use a namespace in favor of prefixed functions.</li>
+<li>It might be a good idea to wrap functions in <code>if (function_exists('function_name'))</code>.<br />
+<em>Note:</em> Applying this rule is no longer required if a namespace is used, so use a namespace in favor of prefixed functions.</li>
+<li>Consider using a template engine like <a href="https://github.com/timber/timber">Timber</a>. Do not use a sledgehammer to crack a nut. For a simple theme it’s not required, but a for a complex one it might be a good idea to use such a tool.</li>
+<li>Use modern PHP syntax like <a href="http://php.net/manual/pl/language.types.array.php">array literals</a> or <a href="http://php.net/manual/en/functions.anonymous.php">anonymous functions</a>
+<pre><code class="php">  // Wrong:
+  add_action('init', 'my_function');
+  
+  function my_function()
+  {
+      $myArray = array(1, 2, 3);
+      // Do something;
+  }
+  
+  // Right:
+  add_action('init', function () {
+     $myArray = [1, 2, 3];
+     // Do something;
+  });
+</code></pre>
+</li>
+<li>Use non-anonymous functions only if the function is intended to be removed in the future by <code>remove_action()</code> or <code>remove_filter()</code>. This is the only case when anonymous functions are not recommended.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Version Control Setup</h2>
+<ul>
+<li>Store the whole WordPress directory, not only the theme, under version control.</li>
+<li>Do not store any credentials in the files that are version-controlled. Do not keep <code>/wp-config.php</code> file under version control.<br />
+<em>Note</em>: <code>/wp-config.php</code> might be kept under version control only if the credentials are stored outside the <code>/wp-config.php</code> and not version-controlled.</li>
+<li>Do not store environment-specific files under version control (e.g. your IDE configuration file).</li>
+<li>Do not store Media Library directory under version control.</li>
+<li>Here’s a sample <code>.gitignore</code> file:
+<pre><code class="shell">  *.log
+  /.htaccess
+  /license.txt
+  /readme.html
+  /sitemap.xml
+  /sitemap.xml.gz
+  wp-config.php
+  wp-content/advanced-cache.php
+  wp-content/backup-db/
+  wp-content/backups/
+  wp-content/blogs.dir/
+  wp-content/cache/
+  wp-content/upgrade/
+  wp-content/uploads/
+  wp-content/wp-cache-config.php
+  wp-content/plugins/hello.php
+</code></pre>
+</li>
+</ul>
+<h2>Files Structure</h2>
+<ul>
+<li>Keep the theme root directory clean. The root directory should contain <a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">WordPress template files</a> only &#8211; this rule applies to the PHP files only. A theme directory may contain build tools configs (like a <code>gulpfile.js</code>or a <code>composer.json</code>).</li>
+<li>Keep partials (the files that are called with a <code>get_template_part()</code> function) under a separate directory (e.g. <code>partials</code>). If there are multiple partials, then create sub-directories to keep the <code>/partials</code> dir well organised.</li>
+<li>Keep page templates under a separate directory (e.g. <code>page-templates</code>).</li>
+<li>Keep all the source files (css, js, images, etc) under a separate directory (e.g. <code>src</code>).</li>
+<li>Keep production-ready files (files compiled with a build tool like Gulp) under a separated directory (e.g. <code>dist</code>). Do not commit the <code>dist</code> directory to the repository.</li>
+<li>When you use the ACF plugin, remember to create a <code>acf-json</code> directory under the theme directory. Once this directory exists, each time you save a field group, a JSON file will be created / updated.</li>
+</ul>
+<h2>functions.php</h2>
+<ul>
+<li>Do not put everything in the <code>functions.php</code> file. Split the file into smaller feature-specific partials and save them under a sub-directory (e.g. <code>inc</code>) for example:
+<pre><code class="php">  - inc/register-assets.php 
+  - inc/custom-post-types.php
+  - inc/permissions.php
+  - inc/custom-image-sizes.php
+</code></pre>
+</li>
+<li>Files included within <code>functions.php</code> should never call WordPress functions directly. Always attach a function to a proper hook.
+<pre><code class="php">  // Wrong
+  add_image_size('my_custom_size', 200, 200, true);
+
+  // Right
+  add_action('after_setup_theme', function () {
+      add_image_size('my_custom_size', 200, 200, true)
+  });
+</code></pre>
+</li>
+<li>Files included within functions.php should never call WordPress functions directly. Always attach a function to a proper hook.
+<pre><code class="php">  // Wrong
+  add_image_size('my_custom_size', 200, 200, true);
+
+  // Right
+  add_action('after_setup_theme', function () {
+      add_image_size('my_custom_size', 200, 200, true)
+  });
+</code></pre>
+</li>
+<li>Thanks to this, files order doesn’t make any difference.
+<pre><code class="php">  // functions.php
+  
+  // Instead of calling the files in the specific order:
+  require_once('inc/register-assets.php'); 
+  require_once('inc/custom-post-types.php');
+  require_once('inc/permissions.php');
+  require_once('inc/custom-image-sizes.php');
+  (...)
+  
+  // The files can be included dynamically:
+  call_user_func(function () {
+  
+      $fileList = [];
+      $directoryIterator = new DirectoryIterator(__DIR__ . DIRECTORY_SEPARATOR . 'inc');
+  
+      foreach ($directoryIterator as $fileInfo) {
+  
+          if ($fileInfo-&gt;isDot()) {
+              continue;
+          }
+  
+          if ($fileInfo-&gt;getExtension() === 'php') {
+              $fileList[] = $fileInfo-&gt;getRealPath();
+          }
+  
+      }
+  
+      foreach ($fileList as $file) {
+          require_once($file);
+      }
+  
+  });
+</code></pre>
+</li>
+<li>Do not put 3rd party libraries under version control. Use Composer and store the dependencies in the composer.json file.</li>
+</ul>
+<h2>Resources</h2>
+<ul>
+<li>Do not use a <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_head">wp_head</a> hook to add JS/CSS files. It’s a common practice, but it’s not a proper hook.</li>
+<li>Use the proper hook instead: <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts">wp_enqueue_scripts</a>. The name of the hook might be confusing, but this is a right hook for both, JS and CSS registering.</li>
+<li>JS/CSS files should be registered first, then enqueued.</li>
+<li>Use <a href="https://developer.wordpress.org/reference/functions/wp_register_script/">wp_register_script()</a> and <a href="https://codex.wordpress.org/Function_Reference/wp_register_style">wp_register_style()</a></li>
+<li>Remember that: <code>wp_register_style()</code> and <code>wp_register_script()</code> have a <code>$ver</code> argument. Always define a version and remember and bump the version number when significant changes are made. It’s important because it forces the clients to download the updated resource version. Otherwise, the browser might grab the resource from the cache. Defining a constant that stores the theme version might be a good idea.</li>
+<li>Do not overuse scripts/styles registering. Use build tools (like Gulp/Grunt) to concatenate the resources into a single, compressed file. The less HTTP requests a browser makes, the better it is.</li>
+<li>Even if you use build tools, then conditional script enqueuing still might be a good idea. A typical use case is a landing page that has a completely different layout that require a large amount of additional CSS/JS that is not used on other pages.
+<pre><code class="php">  // Example
+  add_action('wp_enqueue_scripts', function () {
+  
+      // Register the `app_js` script
+      wp_register_script('app_js', get_template_directory_uri() . "/dist/js/app.js", null, THEME_VER, true);
+      
+      // Register the `landing_page_js` script
+      wp_register_script('landing_page_js', get_template_directory_uri() . "/dist/js/landing-page.js", null, THEME_VER, true);
+  
+      // Enqueue the `app_js` script on each page
+      wp_enqueue_script('app_js');
+      
+      // Enqueue the `landing_page_js` conditionally
+      if (is_page_template('page-templates/landing-page.php')) {
+          wp_enqueue_script('landing_page_js');
+      }
+  
+  });</code></pre>
+</li>
+</ul>
+<h2>Custom Queries</h2>
+<ul>
+<li>Do not use the <a href="https://developer.wordpress.org/reference/functions/query_posts/">query_posts()</a> function.</li>
+<li>In order to modify the main queries (for example for the archive pages) use the <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts">pre_get_posts</a> hook. It’s a more efficient and more elegant solution than calling the <code>get_posts()</code> function or the <code>new WP_query()</code>constructor within a template file.</li>
+<li>Get familiar with <a href="https://developer.wordpress.org/files/2016/06/avoid_query_posts.png">Make Sense of WP Query Functions</a> diagram.</li>
+<li>Make use of <a href="https://codex.wordpress.org/Class_Reference/WP_Object_Cache">WP_Object_Cache</a> in the case of complex and repeatable queries.</li>
+<li>When the queries are built based on users’ input, remember to sanitize the data. Use <a href="http://php.net/manual/pl/function.filter-input.php">PHP built-in filters</a> or even better register a custom query var and get its value with <a href="https://codex.wordpress.org/Function_Reference/get_query_var">get_query_var()</a>
+<pre><code class="php">  // Wrong:
+  add_action('pre_get_posts', function (\WP_Query $query) {
+  
+      $query-&gt;set('meta_query', [
+           [
+               'key' =&gt; 'filter',
+               'value' =&gt; $_GET['filter'],
+           ]
+      ]);
+  
+  });
+  
+  // Right
+  add_filter('query_vars', function ($vars) {
+      
+      $customVars = [
+          'filter',
+      ];
+  
+      foreach ($customVars as $customVar) {
+          $vars[] = $customVar;
+      }
+  
+      return $vars;
+      
+  });
+  
+  add_action('pre_get_posts', function (\WP_Query $query) {
+  
+      $query-&gt;set('meta_query', [
+          [
+              'key' =&gt; 'filter',
+              'value' =&gt; get_query_var('filter'),
+          ]
+      ]);
+  
+  });</code></pre>
+</li>
+</ul>
+<h2>AJAX</h2>
+<ul>
+<li>Use a proper hook to register AJAX callbacks: <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_(action)">wp_ajax_{action}</a> for the functions to be executed by logged-in users and <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_nopriv_(action)">wp_ajax_nopriv_{action}</a> for the functions to be executed by non-logged-in users.</li>
+<li>Use <a href="https://codex.wordpress.org/WordPress_Nonces">nonces</a>.</li>
+<li>Use <a href="https://codex.wordpress.org/Function_Reference/wp_localize_script">wp_localize_sctipt()</a> function in order to expose the AJAX url to the front-end JS scripts.
+<pre><code class="php">  // Example
+  wp_localize_script('app_js', 'AJAX', [
+      'url' =&gt; admin_url('admin-ajax.php'),
+      'nonce' =&gt; wp_create_nonce('ajax_nonce')
+  ]);
+</code></pre>
+</li>
+<li>Sanitize the data. Use PHP built-in filters &#8211; <a href="http://php.net/manual/pl/function.filter-input.php">filter_input()</a> and <a href="http://php.net/manual/pl/function.filter-input-array.php">filter_input_array()</a>.</li>
+<li>Do not use <code>die()</code> to send the response back to the client. Use <a href="https://codex.wordpress.org/Function_Reference/wp_send_json_error">wp_send_json_error()</a> and <a href="https://codex.wordpress.org/Function_Reference/wp_send_json_success">wp_send_json_success()</a> instead.
+<pre><code class="php">  // Example
+  add_action('wp_ajax_my_action', function () {
+  
+      // Nonce validation
+      if (!wp_verify_nonce($_POST['nonce'], 'ajax_nonce')) {
+          exit(__('No naughty business please', 'my_textdomain'));
+      }
+  
+      // Sanitize the data
+      $counter = filter_input(INPUT_POST, 'counter', FILTER_SANITIZE_NUMBER_INT);
+  
+      // Validate the data
+      if ($counter === false || is_null($counter)) {
+          // Send the error response back to the client
+          wp_send_json_error();
+      }
+  
+      // Do something.
+      (...)
+  
+      // Send the success response back to the client
+      wp_send_json_success();
+  
+  };
+</code></pre>
+</li>
+</ul>
+<h2>Internationalization</h2>
+<ul>
+<li>Make hardcoded strings translatable. Use <a href="https://codex.wordpress.org/Function_Reference/_e">_e()</a>, <a href="https://codex.wordpress.org/Function_Reference/_2">__()</a> and <a href="https://codex.wordpress.org/Function_Reference/_e#Related">related functions</a>. Remember about the second (<code>$domain</code>) argument.</li>
+<li>Use either <a href="https://wordpress.org/plugins/loco-translate/">Loco translate</a> in order to manage the translations directly from the WP Dashboard or a standalone tool like <a href="https://poedit.net/">Poedit</a>.</li>
+<li>Do not store translations in the database. Avoid <a href="https://wpml.org/documentation/getting-started-guide/string-translation/">WPML string translations</a> and <a href="https://wordpress.org/plugins/polylang-theme-strings/">Polylang Theme Strings</a>. Use the standard approach &#8211; <code>*.mo</code> files loaded via <a href="https://codex.wordpress.org/Function_Reference/load_theme_textdomain">load_theme_textdomain()</a> function.
+<pre><code class="php">  // Example
+  add_action('after_setup_theme', function () {
+      load_theme_textdomain('my_textdomain', get_template_directory() . '/languages');
+  });</code></pre>
+</li>
+<li>Do not use <a href="https://wordpress.org/plugins/qtranslate-x/">qTranslate</a>.</li>
+</ul>
+<h2>Plugins</h2>
+<ul>
+<li>Use as few plugins as possible. The more plugins you use, the greater chances there are that something will go wrong during updates.</li>
+<li>Remember that each plugin increases the security vulnerability. The WordPress core is quite secure (in general), whereas plugins are not (not in general… but still).</li>
+<li>Do not use plugins for trivial tasks like custom posts registering. Use <a href="https://generatewp.com/">the generators</a>.</li>
+<li>Avoid non-maintained, outdated plugins. Check an author’s website, Github, review the issues list, check the response time, etc.</li>
+<li>Avoid too complex plugins, It’s better to use multiple, tiny tools that do only one thing and do it right instead of big, fully-featured, bloated plugins.</li>
+<li>Trust nobody. <strong>Always</strong> review plugins’ code.</li>
+<li>Try to avoid the plugins that store project-specific data in the database. For instance, <a href="https://wordpress.org/plugins/types/">Toolset Types</a> stores Custom Post Types setup in the database. It causes problems because the data stored in the database is not version controlled. It’s not always possible, but try to keep this kind of plugins to minimum.</li>
+<li>Check styles and CSS enqueued by plugins. Sometimes the resources are not needed or are needed only on specific pages. Use <a href="https://codex.wordpress.org/Function_Reference/wp_dequeue_script">wp_dequeue_script</a> and <a href="https://codex.wordpress.org/Function_Reference/wp_dequeue_style">wp_dequeue_style</a> in order to get rid of these files. Use a build tool (like Grunt/Gulp) to concatenate the resources into your CSS/JS files or use <a href="https://developer.wordpress.org/reference/functions/wp_enqueue_style/">wp_enqueue_style()</a> / <a href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/">wp_enqueue_script()</a> to enqueue the files only when they’re required.</li>
+</ul>
+<h2>Misc</h2>
+<ul>
+<ul>
+<li>Do not make your theme code data-dependent. For example, instead of creating <code>page-contact.php</code> or even worse <code>page-23.php</code> which are either slug-specific or id-specific templates it’s better to create a <a href="https://developer.wordpress.org/themes/template-files-section/page-template-files/page-templates/">page template</a>.</li>
+<li>Do not rely on user roles, they might be changed by plugins. It’s better to rely on <a href="https://codex.wordpress.org/Roles_and_Capabilities">capabilities</a>.</li>
+<li>Remove unnecessary pages from the WP Dashboard.</li>
+</ul>
+</ul>
+<pre><code class="php">  // Example
+  add_action('admin_menu', function () {
+  
+      if (current_user_can('manage_options')) {
+          return;
+      }
+  
+      $pagesToRemove = [
+          'edit.php',
+          'tools.php',
+          'customize.php',
+      ];
+  
+      $subPagesRomove = [
+          'theme-editor.php',
+          'themes.php',
+          'widgets.php'
+      ];
+  
+      foreach ($pagesToRemove as $page) {
+          remove_menu_page($page);
+      }
+  
+      foreach ($subPagesRomove as $page) {
+          remove_submenu_page('themes.php', $page);
+  
+      }
+  
+  });
+</code></pre>
+<ul>
+<li>Remember that even when the pages are removed from the menus they can still be accessed directly. In order to revoke the access, an additional effort is required:
+<pre><code class="php">  // Example
+  add_action('current_screen', function ($currentScreen) {
+      
+      if (current_user_can('manage_options')) {
+          return;
+      }
+      
+      $disallowedIds = [
+          'theme-editor',
+          'themes',
+          'widgets',
+          'tools'
+      ];
+  
+      if (in_array($currentScreen-&gt;base, $disallowedIds)) {
+          wp_die("Access denied");
+      }
+  
+  });
+</code></pre>
+</li>
+<li>Do not grant admin access to the site users. Extend users’ permissions when additional privileges are required.
+<pre><code class="php">  // Example
+  add_action('admin_init', function () {
+      $editorRole = get_role('editor');
+      $editorRole-&gt;add_cap('edit_theme_options');
+  });
+</code></pre>
+</li>
+</ul>
+                    </article>
+                </div>
+            </main>
+            <footer>
+                <div class="inner">
+                    <p class="heading-sub -sans -gray">Read also:</p>
+                    <ul>
+                        <li>
+                            <a target="_blank" href="http://blog.pagepro.co/2017/01/08/our-wordpress-coding-standards/">Blog Post</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
