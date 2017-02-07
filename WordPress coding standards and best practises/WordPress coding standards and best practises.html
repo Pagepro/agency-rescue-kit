@@ -238,8 +238,8 @@ pre .variable.instance {
 <li>Do not reinvent the wheel. Follow the <a href="http://www.php-fig.org/psr/">PSR</a> rules &#8211; it’s a widely adopted standard.</li>
 <li>Name variables in a consistent way: either <code>$camelCase</code> or <code>$underscore_case</code> but never both.</li>
 <li><a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#single-and-double-quotes">Use single and double quotes when appropriate</a></li>
-<li>Use meaningful functions’ names. A good function name should indicate what the function is supposed to do and what type of data it takes and returns.</li>
-<li>Use meaningful variables’ names. A good variable name should indicate it’s type.</li>
+<li>Use meaningful functions names. A good function name should indicate what the function is supposed to do and what type of data it takes and returns.</li>
+<li>Use meaningful variables names. A good variable name should indicate it’s type.</li>
 <li><a href="https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/">Document the code</a>. If a function name is self-explanatory, then the detailed explanation is not needed but its arguments have to be documented anyway.</li>
 <li>In order to separate the PHP code from the HTML code, use the <a href="http://php.net/manual/pl/control-structures.alternative-syntax.php">alternative control structure syntax</a>.
 <pre><code class="php">// Wrong:
@@ -357,7 +357,7 @@ pre .variable.instance {
 </ul>
 <h2>Files Structure</h2>
 <ul>
-<li>Keep the theme root directory clean. The root directory should contain <a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">WordPress template files</a> only &#8211; this rule applies to the PHP files only. A theme directory may contain build tools configs (like a <code>gulpfile.js</code>or a <code>composer.json</code>).</li>
+<li>Keep the theme root directory clean. The root directory should contain <a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">WordPress template files</a> only &#8211; this rule applies to the PHP files only. A theme directory may contain build tools' configuration files (like a <code>gulpfile.js</code>or a <code>composer.json</code>).</li>
 <li>Keep partials (the files that are called with a <code>get_template_part()</code> function) under a separate directory (e.g. <code>partials</code>). If there are multiple partials, then create sub-directories to keep the <code>/partials</code> dir well organised.</li>
 <li>Keep page templates under a separate directory (e.g. <code>page-templates</code>).</li>
 <li>Keep all the source files (css, js, images, etc) under a separate directory (e.g. <code>src</code>).</li>
@@ -433,12 +433,12 @@ pre .variable.instance {
 <h2>Resources</h2>
 <ul>
 <li>Do not use a <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_head">wp_head</a> hook to add JS/CSS files. It’s a common practice, but it’s not a proper hook.</li>
-<li>Use the proper hook instead: <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts">wp_enqueue_scripts</a>. The name of the hook might be confusing, but this is a right hook for both, JS and CSS registering.</li>
+<li>Use the proper hook instead: <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts">wp_enqueue_scripts</a>. The name of the hook might be confusing, but this is the right hook for both, JS and CSS registering.</li>
 <li>JS/CSS files should be registered first, then enqueued.</li>
 <li>Use <a href="https://developer.wordpress.org/reference/functions/wp_register_script/">wp_register_script()</a> and <a href="https://codex.wordpress.org/Function_Reference/wp_register_style">wp_register_style()</a></li>
-<li>Remember that: <code>wp_register_style()</code> and <code>wp_register_script()</code> have a <code>$ver</code> argument. Always define a version and remember and bump the version number when significant changes are made. It’s important because it forces the clients to download the updated resource version. Otherwise, the browser might grab the resource from the cache. Defining a constant that stores the theme version might be a good idea.</li>
+<li>Remember that: <code>wp_register_style()</code> and <code>wp_register_script()</code> have a <code>$ver</code> argument. Always define a version and remember to bump the version number when significant changes are made. It’s important because it forces the clients to download the updated resource version. Otherwise, the browser might grab the resource from the cache. Defining a constant that stores the theme version might be a good idea.</li>
 <li>Do not overuse scripts/styles registering. Use build tools (like Gulp/Grunt) to concatenate the resources into a single, compressed file. The less HTTP requests a browser makes, the better it is.</li>
-<li>Even if you use build tools, then conditional script enqueuing still might be a good idea. A typical use case is a landing page that has a completely different layout that require a large amount of additional CSS/JS that is not used on other pages.
+<li>Even if you use build tools, conditional script enqueuing still might be a good idea. A typical use case is a landing page that has a completely different layout that requires a large amount of additional CSS/JS that is not used on other pages.
 <pre><code class="php">  // Example
   add_action('wp_enqueue_scripts', function () {
   
@@ -465,7 +465,7 @@ pre .variable.instance {
 <li>In order to modify the main queries (for example for the archive pages) use the <a href="https://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts">pre_get_posts</a> hook. It’s a more efficient and more elegant solution than calling the <code>get_posts()</code> function or the <code>new WP_query()</code>constructor within a template file.</li>
 <li>Get familiar with <a href="https://developer.wordpress.org/files/2016/06/avoid_query_posts.png">Make Sense of WP Query Functions</a> diagram.</li>
 <li>Make use of <a href="https://codex.wordpress.org/Class_Reference/WP_Object_Cache">WP_Object_Cache</a> in the case of complex and repeatable queries.</li>
-<li>When the queries are built based on users’ input, remember to sanitize the data. Use <a href="http://php.net/manual/pl/function.filter-input.php">PHP built-in filters</a> or even better register a custom query var and get its value with <a href="https://codex.wordpress.org/Function_Reference/get_query_var">get_query_var()</a>
+<li>When the queries are built based on users’ input, remember to sanitize the data. Use <a href="http://php.net/manual/pl/function.filter-input.php">PHP built-in filters</a> or even better &#8211; register a custom query var and get its value with <a href="https://codex.wordpress.org/Function_Reference/get_query_var">get_query_var()</a>
 <pre><code class="php">  // Wrong:
   add_action('pre_get_posts', function (\WP_Query $query) {
   
